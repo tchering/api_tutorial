@@ -1,0 +1,16 @@
+<%= form_with(url: search_photos_path, method: :get) do |f| %>
+  <%= f.label :user_id, "Flickr User Id:" %>
+  <%= f.text_field :user_id, value: params[:user_id] %>
+  <%= f.submit "Search" %>
+<% end %>
+<% if @photos.present? %>
+  <h1>Flickr Photos</h1>
+  <% @photos.each do |photo| %>
+    <div>
+      <%= image_tag "https://live.staticflickr.com/#{photo.server}/#{photo.id}_#{photo.secret}.jpg",size: "200x200" %>
+      <p><%= photo.title %></p>
+    </div>
+  <% end %>
+<% else %>
+  <p>No photos found</p>
+<% end %>
